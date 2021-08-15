@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+import routes from './src/routes/routes';
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.get('/', (req, res) =>
     res.send(`Store server running on port ${PORT}`)
 );
+routes(app);
 
 app.listen(PORT, () => 
     console.log(`Your server is running on port ${PORT}`)
