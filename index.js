@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 4000;
-const server = "localhost";
-const database = "productsdb";
 
 // bodyparser setup
 app.use(express.urlencoded({ extended: true }));
@@ -20,17 +18,12 @@ app.listen(PORT, () =>
 );
 
 // mongoose connection
-const coneectDB = async()=> {
-    try{
-        await mongoose.connect('mongodb://localhost/productsdb', {
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/productsdb', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            //useFindAndModify: false,
-            //useCreateIndex: true
-        });
-    }catch(err){
-        console.log("Failed to connect to DataBase", err);
-    }
-};
+            useFindAndModify: false,
+            useCreateIndex: true
+});
 
-connectDB();
+//mongoose.connection.on('error', console.error.bind(console, 'Error de conexión MongoDB:'));
